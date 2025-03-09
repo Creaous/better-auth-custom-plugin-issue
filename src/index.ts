@@ -7,19 +7,18 @@ migrator();
 const app = new Hono();
 
 app.get("/", async (c) => {
-  // doesn't work at all
-  // authClient.createInvitation();
-  // works but there is no type??
-  // auth.api.createInvitation();
+  try {
+    await auth.api.signUpEmail({
+      body: {
+        name: "test",
+        email: "test@test.com",
+        password: "P@ssw0rd",
+        username: "test",
+      },
+    });
+  } catch (e) {}
 
-  await auth.api.signUpEmail({
-    body: {
-      name: "test",
-      email: "test@test.com",
-      password: "test",
-      username: "test",
-    },
-  });
+  console.log(await auth.api.test());
 
   return c.text("Hello World");
 });

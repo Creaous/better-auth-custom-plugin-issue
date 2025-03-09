@@ -1,7 +1,7 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { username } from "better-auth/plugins";
-import { invitation } from "../invitation-plugin";
+import { test } from "../test-plugin";
 import { migrator } from "./migrate";
 import { db } from "./db";
 
@@ -12,5 +12,5 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-  plugins: [username(), invitation()],
+  plugins: [username(), test()],
 });

@@ -9,8 +9,7 @@ export const user = pgTable("user", {
  createdAt: timestamp('created_at').notNull(),
  updatedAt: timestamp('updated_at').notNull(),
  username: text('username').unique(),
- displayUsername: text('display_username'),
- invitation: text('invitation').unique()
+ displayUsername: text('display_username')
 				});
 
 export const session = pgTable("session", {
@@ -49,10 +48,13 @@ export const verification = pgTable("verification", {
  updatedAt: timestamp('updated_at')
 				});
 
-export const invitation = pgTable("invitation", {
+export const violation = pgTable("violation", {
 					id: text("id").primaryKey(),
-					code: text('code').notNull().unique(),
- creatorId: text('creator_id').notNull().references(()=> user.id, { onDelete: 'cascade' }),
+					content: text('content').notNull(),
+ publicComment: text('public_comment'),
+ internalNote: text('internal_note'),
+ severity: integer('severity').notNull(),
+ moderatorId: text('moderator_id').references(()=> user.id, { onDelete: 'cascade' }),
  userId: text('user_id').references(()=> user.id, { onDelete: 'cascade' }),
  createdAt: timestamp('created_at').notNull(),
  updatedAt: timestamp('updated_at').notNull()
